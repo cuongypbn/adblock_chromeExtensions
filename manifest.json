@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Block Site",
+  "description": "Blocks access to time-consuming websites (as you specify) to improve your productivity.",
+  "version": "1.0",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "options.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "options.html"
+  }
+}
