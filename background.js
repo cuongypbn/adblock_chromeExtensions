@@ -8,7 +8,9 @@
 //         }
 //     });
 // });
-
+// chrome.webRequest.onBeforeRequest.addListener(function () {
+//     alert("cccc");
+// })
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
     var urlArray = [];
     const url = changeInfo.pendingUrl || changeInfo.url;
@@ -22,7 +24,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
             }
         }
         var filter = {urls: urlArray};
-        chrome.webRequest.onBeforeRequest.addListener(()=>{return {cancel:true}},filter,["blocking"]);
+        if(filter.urls.length >0){
+            chrome.webRequest.onBeforeRequest.addListener(myfunction,filter,["blocking"]);
+        }else{
+            chrome.webRequest.onBeforeRequest.removeListener(myfunction);
+        }
     });
 });
 
+var myfunction= function (info) {
+    return {cancel: true};
+};
